@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía Examen Final — Gestión de Ventas ESAN</title>
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #161922;
+    --surface2: #1e2230;
+    --border: #2a2f40;
+    --text: #e2e6f0;
+    --muted: #8b91a8;
+    --accent-ix: #7c6fff;   /* Motivación — violeta */
+    --accent-x:  #ff6b6b;   /* Compensación — coral */
+    --accent-xi: #34d399;   /* Evaluación — verde */
+    --accent-xiv:#f59e0b;   /* Tecnología — ámbar */
+    --tag-both: #22c55e;
+    --tag-diapo: #60a5fa;
+    --tag-hair: #f97316;
+    --font-head: 'Segoe UI', system-ui, sans-serif;
+    --font-body: 'Segoe UI', system-ui, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+
+  /* ───── HEADER ───── */
+  .hero {
+    background: linear-gradient(135deg, #0d0f14 0%, #1a1040 50%, #0d1a1f 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 3rem 2rem 2rem;
+    text-align: center;
+  }
+  .hero-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+  }
+  .hero h1 {
+    font-size: clamp(1.5rem, 4vw, 2.4rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  .hero p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 1.5rem;
+  }
+  .topic-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  .pill {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    border: none;
+    transition: opacity 0.2s;
+  }
+  .pill:hover { opacity: 0.8; }
+  .pill-ix  { background: #2d1f6e; color: var(--accent-ix); }
+  .pill-x   { background: #3d1a1a; color: var(--accent-x); }
+  .pill-xi  { background: #0f3028; color: var(--accent-xi); }
+  .pill-xiv { background: #3a2800; color: var(--accent-xiv); }
+
+  /* ───── NAV TABS ───── */
+  .tabs-bar {
+    display: flex;
+    overflow-x: auto;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    scrollbar-width: none;
+  }
+  .tabs-bar::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex-shrink: 0;
+    padding: 14px 22px;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .tab-btn.active { color: var(--text); }
+  .tab-btn[data-tab="ix"].active  { border-color: var(--accent-ix); color: var(--accent-ix); }
+  .tab-btn[data-tab="x"].active   { border-color: var(--accent-x);  color: var(--accent-x); }
+  .tab-btn[data-tab="xi"].active  { border-color: var(--accent-xi); color: var(--accent-xi); }
+  .tab-btn[data-tab="xiv"].active { border-color: var(--accent-xiv);color: var(--accent-xiv); }
+  .tab-btn[data-tab="quiz"].active{ border-color: #e879f9; color: #e879f9; }
+  .tab-btn[data-tab="mapa"].active{ border-color: #94a3b8; color: #94a3b8; }
+
+  /* ───── MAIN LAYOUT ───── */
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ───── SECTION HEADERS ───── */
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-num {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+  .num-ix  { background: #2d1f6e; color: var(--accent-ix); }
+  .num-x   { background: #3d1a1a; color: var(--accent-x); }
+  .num-xi  { background: #0f3028; color: var(--accent-xi); }
+  .num-xiv { background: #3a2800; color: var(--accent-xiv); }
+  .section-head h2 { font-size: 1.25rem; font-weight: 700; }
+
+  /* ───── SUBSECTION ───── */
+  .subsec { margin-bottom: 2rem; }
+  .subsec-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+    padding-left: 0.75rem;
+    border-left: 3px solid var(--border);
+  }
+
+  /* ───── ACCORDION ───── */
+  .acc-item {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 0.6rem;
+    overflow: hidden;
+  }
+  .acc-trigger {
+    width: 100%;
+    background: var(--surface);
+    border: none;
+    color: var(--text);
+    padding: 14px 18px;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 0.15s;
+  }
+  .acc-trigger:hover { background: var(--surface2); }
+  .acc-trigger.open { background: var(--surface2); }
+  .acc-arrow { font-size: 12px; transition: transform 0.2s; color: var(--muted); }
+  .acc-trigger.open .acc-arrow { transform: rotate(180deg); }
+  .acc-body {
+    display: none;
+    padding: 16px 18px;
+    background: var(--surface2);
+    border-top: 1px solid var(--border);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .acc-body.open { display: block; }
+
+  /* ───── THEORY CARDS ───── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .theory-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+  }
+  .theory-card h4 {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .theory-card p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* ───── COMPARISON TABLE ───── */
+  .cmp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-bottom: 1.5rem;
+  }
+  .cmp-table th {
+    background: var(--surface);
+    padding: 10px 14px;
+    text-align: left;
+    font-weight: 700;
+    border: 1px solid var(--border);
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+  .cmp-table td {
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.55;
+  }
+  .cmp-table tr:nth-child(even) td { background: var(--surface); }
+
+  /* ───── SOURCE TAGS ───── */
+  .source-both  { display: inline-block; background: #14532d; color: var(--tag-both); font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
+  .source-diapo { display: inline-block; background: #1e3a5f; color: var(--tag-diapo); font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
+  .source-hair  { display: inline-block; background: #431407; color: var(--tag-hair); font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
+
+  /* ───── ALERT BOXES ───── */
+  .alert {
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin-bottom: 1rem;
+    font-size: 13.5px;
+    line-height: 1.65;
+    border-left: 4px solid;
+  }
+  .alert-key   { background: #1a1a2e; border-color: var(--accent-ix); }
+  .alert-red   { background: #1f0d0d; border-color: var(--accent-x); }
+  .alert-green { background: #071f16; border-color: var(--accent-xi); }
+  .alert-amber { background: #1f1400; border-color: var(--accent-xiv); }
+  .alert-label { font-weight: 700; margin-bottom: 4px; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
+
+  /* ───── PROCESS STEPS ───── */
+  .steps {
+    counter-reset: step;
+    margin-bottom: 1.5rem;
+  }
+  .step {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+    align-items: flex-start;
+  }
+  .step-num {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .step-body { font-size: 13.5px; padding-top: 4px; line-height: 1.6; }
+  .step-body strong { color: var(--text); }
+  .step-body span { color: var(--muted); }
+
+  /* ───── QUIZ ───── */
+  .quiz-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .quiz-q {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+  .quiz-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+  }
+  .qt-ix  { background: #2d1f6e; color: var(--accent-ix); }
+  .qt-x   { background: #3d1a1a; color: var(--accent-x); }
+  .qt-xi  { background: #0f3028; color: var(--accent-xi); }
+  .qt-xiv { background: #3a2800; color: var(--accent-xiv); }
+  .qt-int { background: #1a0f2e; color: #e879f9; }
+  .reveal-btn {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: all 0.2s;
+  }
+  .reveal-btn:hover { color: var(--text); border-color: var(--muted); }
+  .answer-box {
+    display: none;
+    margin-top: 1rem;
+    padding: 14px;
+    background: #0f1f17;
+    border-radius: 8px;
+    border-left: 3px solid var(--accent-xi);
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .answer-box.open { display: block; }
+  .answer-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; color: var(--accent-xi); text-transform: uppercase; margin-bottom: 0.5rem; }
+
+  /* ───── INTEGRATION MAP ───── */
+  .map-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .map-title { font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
+  .map-flow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 13px;
+  }
+  .map-node {
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 12.5px;
+  }
+  .map-arrow { color: var(--muted); font-size: 18px; }
+  .mn-ix  { background: #2d1f6e; color: var(--accent-ix); }
+  .mn-x   { background: #3d1a1a; color: var(--accent-x); }
+  .mn-xi  { background: #0f3028; color: var(--accent-xi); }
+  .mn-xiv { background: #3a2800; color: var(--accent-xiv); }
+
+  /* ───── DEFINITION BOX ───── */
+  .def-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+    font-size: 13.5px;
+    line-height: 1.65;
+  }
+  .def-term { font-weight: 700; color: var(--text); }
+  .def-src  { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+  ul.content-list {
+    padding-left: 1.25rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  ul.content-list li { margin-bottom: 0.4rem; font-size: 13.5px; line-height: 1.6; }
+
+  p.prose { font-size: 13.5px; line-height: 1.7; margin-bottom: 0.75rem; color: #c8cdd e; }
+
+  .divider { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+
+  @media (max-width: 600px) {
+    .card-grid { grid-template-columns: 1fr; }
+    .cmp-table { font-size: 12px; }
+    .cmp-table td, .cmp-table th { padding: 8px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">Gestión de Ventas · ESAN VIII Ciclo · Examen Final</div>
+  <h1>Guía de Estudio<br>Examen Final</h1>
+  <p>Material basado en diapositivas de clase y Hair et al. (2010) · Prof. Mario Valdez Salas</p>
+  <div class="topic-pills">
+    <button class="pill pill-ix" onclick="switchTab('ix')">IX. Motivación</button>
+    <button class="pill pill-x"  onclick="switchTab('x')">X. Compensación</button>
+    <button class="pill pill-xi" onclick="switchTab('xi')">XI. Evaluación y Desempeño</button>
+    <button class="pill pill-xiv" onclick="switchTab('xiv')">XIV. Tecnología</button>
+    <button class="pill" style="background:#2a0a3e;color:#e879f9" onclick="switchTab('quiz')">Práctica de Preguntas</button>
+    <button class="pill" style="background:#1a2030;color:#94a3b8" onclick="switchTab('mapa')">Mapa Integrador</button>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs-bar">
+  <button class="tab-btn active" data-tab="ix" onclick="switchTab('ix')">IX · Motivación</button>
+  <button class="tab-btn" data-tab="x"   onclick="switchTab('x')">X · Compensación</button>
+  <button class="tab-btn" data-tab="xi"  onclick="switchTab('xi')">XI · Evaluación</button>
+  <button class="tab-btn" data-tab="xiv" onclick="switchTab('xiv')">XIV · Tecnología</button>
+  <button class="tab-btn" data-tab="quiz" onclick="switchTab('quiz')">Preguntas</button>
+  <button class="tab-btn" data-tab="mapa" onclick="switchTab('mapa')">Mapa Integrador</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     TAB IX — MOTIVACIÓN
+════════════════════════════════════════════════ -->
+<div class="tab-panel active" id="tab-ix">
+<div class="container">
+
+  <div class="section-head">
+    <span class="section-num num-ix">TEMA IX</span>
+    <h2>Motivación de la Fuerza de Ventas</h2>
+  </div>
+
+  <div class="alert alert-key">
+    <div class="alert-label">Definición central <span class="source-both">DIAPOS + HAIR</span></div>
+    Motivación es una serie de procesos interpersonales que originan la iniciación, dirección, intensidad y persistencia de conductas orientadas al logro de metas y objetivos organizacionales. El profesor enfatizó el modelo integrador: liderazgo + plan de compensación + incentivos extraordinarios + cultura organizacional = motivación.
+  </div>
+
+  <!-- 9.1 Fundamentos -->
+  <div class="subsec">
+    <div class="subsec-title">9.1 Fundamentos de la motivación</div>
+
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggle(this)">
+        El gobierno de personas: alinear agendas <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        El punto de partida de la motivación en ventas es la alineación entre lo que la empresa puede dar al empleado y lo que espera recibir de él. El profesor ilustró esto con el Atlético de Madrid bajo Simeone: no siempre gana el mejor, sino el más convencido. Los factores motivadores son cuatro: liderazgo, plan de compensación (financieros y no financieros), incentivos extraordinarios, y cultura organizacional. Todos convergen para producir motivación.
+      </div>
+    </div>
+  </div>
+
+  <!-- 9.2 Teorías -->
+  <div class="subsec">
+    <div class="subsec-title">9.2 Teorías de la motivación <span class="source-both">DIAPOS + HAIR CAP. 11</span></div>
+
+    <div class="alert alert-key">
+      <div class="alert-label">Clasificación de teorías — alta probabilidad de evaluación</div>
+      Las teorías se dividen en tres grupos: <strong>Contenido</strong> (qué necesita la persona), <strong>Proceso</strong> (cómo piensa y decide la persona), y <strong>Reforzamiento</strong> (cómo modificar el comportamiento).
+    </div>
+
+    <div class="card-grid">
+      <div class="theory-card">
+        <h4 style="color:var(--accent-ix)">Jerarquía de Maslow</h4>
+        <p>Cinco niveles: fisiológicas, seguridad, sociales, estima, autorrealización. La satisfacción de un nivel activa el siguiente. Clasificación: <strong>Contenido</strong>.</p>
+      </div>
+      <div class="theory-card">
+        <h4 style="color:var(--accent-ix)">Teoría ERG (Alderfer)</h4>
+        <p>Tres categorías: Existencia (psicológicas + seguridad), Afinidad (sociales + estima), Crecimiento (autorrealización). Permite saltar entre niveles. Clasificación: <strong>Contenido</strong>.</p>
+      </div>
+      <div class="theory-card">
+        <h4 style="color:var(--accent-ix)">McClelland — Necesidades</h4>
+        <p>Necesidades desarrolladas con base en experiencias: <strong>Poder</strong> (dominar, influir), <strong>Logro</strong> (retos, retroalimentación, baja tolerancia al fracaso), <strong>Afiliación</strong> (trabajo grupal). Clasificación: <strong>Contenido</strong>.</p>
+      </div>
+      <div class="theory-card">
+        <h4 style="color:var(--accent-ix)">Herzberg — Dos Factores</h4>
+        <p><strong>Higiénicos:</strong> remuneración, condiciones, seguridad (evitan insatisfacción). <strong>Motivacionales:</strong> responsabilidad, logro, reconocimiento, desarrollo (generan satisfacción). Clasificación: <strong>Contenido</strong>.</p>
+      </div>
+      <div class="theory-card">
+        <h4 style="color:var(--accent-x)">Teoría de la Equidad</h4>
+        <p>El vendedor compara su esfuerzo y recompensa con los de otros. Si percibe inequidad, puede distorsionar percepciones o renunciar. Clasificación: <strong>Proceso</strong>.</p>
+      </div>
+      <div class="theory-card">
+        <h4 style="color:var(--accent-x)">Teoría de la Expectativa (Vroom)</h4>
+        <p>Motivación = Expectativa (esfuerzo → resultado) × Instrumentalidad (resultado → recompensa) × Valencia (atractivo de la recompensa). Clasificación: <strong>Proceso</strong>.</p>
+      </div>
+      <div class="theory-card">
+        <h4 style="color:var(--accent-x)">Teoría de la Atribución</h4>
+        <p>El vendedor atribuye sus resultados a causas internas (habilidad, esfuerzo) o externas (suerte, territorio). La gerencia debe ayudar a hacer atribuciones exactas. Clasificación: <strong>Proceso</strong>.</p>
+      </div>
+      <div class="theory-card">
+        <h4 style="color:var(--accent-x)">Establecimiento de Metas</h4>
+        <p>Vincular recompensas directamente con metas individuales. Metas específicas por vendedor y sistema de compensación ajustado a necesidades individuales. Clasificación: <strong>Proceso</strong>.</p>
+      </div>
+    </div>
+
+    <!-- TABLA COMPARATIVA MASLOW vs ERG -->
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggle(this)">
+        Comparación Maslow vs ERG — distinción clave de examen <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        <table class="cmp-table">
+          <tr>
+            <th>Dimensión</th>
+            <th>Maslow</th>
+            <th>ERG (Alderfer)</th>
+          </tr>
+          <tr>
+            <td>Niveles</td>
+            <td>5 (pirámide estricta)</td>
+            <td>3 (Existencia, Afinidad, Crecimiento)</td>
+          </tr>
+          <tr>
+            <td>Progresión</td>
+            <td>Ascendente, un nivel a la vez</td>
+            <td>Flexible; se puede saltar hacia arriba o regresar</td>
+          </tr>
+          <tr>
+            <td>Frustración</td>
+            <td>No contempla regresión</td>
+            <td>Frustración en un nivel activa necesidades inferiores</td>
+          </tr>
+          <tr>
+            <td>Aplicación en ventas</td>
+            <td>Diseño escalonado de beneficios</td>
+            <td>Más flexible para equipos heterogéneos</td>
+          </tr>
+        </table>
+        <p style="font-size:13px;color:var(--muted)">Pregunta típica: Gustavo tiene 6 hijos y un salario que no cubre necesidades mínimas. En Maslow está en el nivel fisiológico. En ERG está en Existencia. En Herzberg, el factor higiénico (salario) está insatisfecho.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9.3 Programas de incentivos -->
+  <div class="subsec">
+    <div class="subsec-title">9.3 Programas de incentivos</div>
+
+    <div class="def-box">
+      <div class="def-term">Tipos de recompensas en los programas de incentivos</div>
+      <ul class="content-list">
+        <li><strong>Extrínsecas</strong> (provienen de la organización): oportunidades de promoción, recompensas económicas, reconocimientos públicos.</li>
+        <li><strong>Intrínsecas</strong> (las experimenta el propio vendedor): satisfacción personal, sensación de logro, propósito.</li>
+        <li><strong>Incentivos no financieros</strong>: seguridad en el empleo, mejores condiciones de trabajo, responsabilidad creciente.</li>
+      </ul>
+      <div class="def-src">Fuente: Diapositivas sesión 11</div>
+    </div>
+
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggle(this)">
+        Desarrollo de un programa de reconocimiento <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        Un buen programa de reconocimiento debe: (1) basarse en criterios objetivos, (2) permitir que todos puedan ganar, con recompensas por desempeño superior en varias categorías, (3) incluir premiación pública frente al equipo, y (4) tener mucha publicidad para que toda la empresa colabore en la celebración.
+      </div>
+    </div>
+  </div>
+
+  <!-- 9.4 Estrategias y herramientas -->
+  <div class="subsec">
+    <div class="subsec-title">9.4 Estrategias y herramientas para la motivación</div>
+
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggle(this)">
+        Concursos de ventas — resultados deseables e indeseables <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        <strong>Resultados deseables:</strong> mayor volumen de ventas, mayor esfuerzo sostenido.<br>
+        <strong>Resultados indeseables:</strong> el vendedor solo se esfuerza cuando existe recompensa, no hay compromiso permanente.<br><br>
+        <strong>Planificación del concurso:</strong>
+        <ul class="content-list">
+          <li>Definir claramente propósito, metas y objetivos (nuevos clientes, venta de nuevo producto, rentabilidad, satisfacción del cliente).</li>
+          <li>Metas pocas y medibles.</li>
+          <li>Tema creativo, novedoso y publicitado.</li>
+          <li>Reglas claras que eviten abusos.</li>
+          <li>Premios aspiracionales y deseables; el dinero en efectivo es "más de lo mismo" (equivale a una comisión).</li>
+          <li>Todos deben poder ganar; no siempre el mismo.</li>
+          <li>Duración corta: 3 a 5 meses.</li>
+          <li>Pre-evaluación del retorno de inversión antes de lanzar.</li>
+        </ul>
+        <strong>Premios con más valor intrínseco</strong> (refuerzan imagen de marca, generan fidelidad): privilegios, atenciones, experiencias lúdicas, viajes familiares.<br>
+        <strong>Premios con más valor extrínseco</strong> (descuentos en precio o efectivo): generan infidelidad de marca.
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggle(this)">
+        Juntas de ventas — propósito y planificación <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        Las juntas de ventas son oportunidades para la comunicación bidireccional entre todos los miembros del equipo de marketing, personal de ventas y oficinas. Su planificación incluye: definir metas de la junta, seleccionar un tema integrador, desarrollar agenda y coordinar participantes. Son oportunidades para: premiar logros personales, anunciar mejoras en bonos, dar capacitación especializada, anunciar nuevos productos y cambiar el ritmo del equipo.
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggle(this)">
+        Motivación por etapa de carrera del vendedor <span class="source-diapo">DIAPOS</span> <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        <table class="cmp-table">
+          <tr>
+            <th>Etapa</th>
+            <th>Característica</th>
+            <th>Motivador clave</th>
+          </tr>
+          <tr>
+            <td>Preparación exploratoria</td>
+            <td>Primeros pasos; puede cambiar de ocupación</td>
+            <td>Comunicación que desarrolle autoconfianza y reduzca incertidumbre</td>
+          </tr>
+          <tr>
+            <td>Desarrollo</td>
+            <td>Busca estabilidad y promociones</td>
+            <td>Ampliar criterios de éxito; recompensas por enfrentar retos</td>
+          </tr>
+          <tr>
+            <td>Madurez</td>
+            <td>Busca consolidar logros y adaptarse</td>
+            <td>Recompensar creatividad y autoconfianza; técnicas para ser más efectivo</td>
+          </tr>
+          <tr>
+            <td>Declinación</td>
+            <td>Reducción del desempeño; se prepara para retiro</td>
+            <td>Ayudar a reducir horas; proyectos especiales relacionados con ventas</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     TAB X — COMPENSACIÓN
+════════════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-x">
+<div class="container">
+
+  <div class="section-head">
+    <span class="section-num num-x">TEMA X</span>
+    <h2>Compensación de la Fuerza de Ventas</h2>
+  </div>
+
+  <div class="alert alert-red">
+    <div class="alert-label">Definición central <span class="source-both">DIAPOS + HAIR CAP. 12</span></div>
+    Compensación: todos los pagos monetarios y prestaciones utilizados para remunerar a los empleados por su desempeño. Hair la reconoce como el mayor motivador de la fuerza de ventas, aunque no el único. El plan de compensación es el "volante" que permite a la gerencia influir directamente en el comportamiento del vendedor.
+  </div>
+
+  <!-- 10.1 Planes y desarrollo -->
+  <div class="subsec">
+    <div class="subsec-title">10.1 Planes de compensación y desarrollo del plan</div>
+
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggle(this)">
+        Los tres métodos básicos de compensación <span class="source-both">DIAPOS + HAIR</span> <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        <table class="cmp-table">
+          <tr>
+            <th>Método</th>
+            <th>Qué es</th>
+            <th>Cuándo usar</th>
+          </tr>
+          <tr>
+            <td><strong>Sueldo directo</strong></td>
+            <td>Suma fija a intervalos regulares</td>
+            <td>Venta en equipo, negociaciones prolongadas, ventas misioneras, nuevos mercados o productos, períodos de capacitación</td>
+          </tr>
+          <tr>
+            <td><strong>Comisión directa</strong></td>
+            <td>Pago variable según resultados de ventas o utilidades</td>
+            <td>Ventas sencillas de mostrador donde solo se requiere vender; el ingreso depende del logro personal, no de la evaluación subjetiva</td>
+          </tr>
+          <tr>
+            <td><strong>Combinado</strong></td>
+            <td>Sueldo fijo + comisión (y opcionalmente bonos)</td>
+            <td>El más ampliamente utilizado; combina seguridad con incentivos</td>
+          </tr>
+        </table>
+        <p style="font-size:13px;margin-top:0.75rem">Dentro de "basado en incentivos" también existen: bono por desempeño, pago por méritos, participación de utilidades (obligatoria en Perú), pago por conocimientos, opciones de acciones, y pago flexible tipo "menú de cafetería".</p>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggle(this)">
+        Las 7 etapas del desarrollo del plan de compensación <span class="source-both">DIAPOS + HAIR CAP. 12</span> <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        <div class="steps">
+          <div class="step">
+            <div class="step-num" style="background:#2d1f6e;color:var(--accent-ix)">1</div>
+            <div class="step-body"><strong>Elaborar la descripción de puestos.</strong> <span>Define responsabilidades y criterios de desempeño. Permite asignar niveles similares a puestos equivalentes. Existen niveles verticales (trainee, representante, representante senior) y horizontales (misionero, mostrador, venta personal).</span></div>
+          </div>
+          <div class="step">
+            <div class="step-num" style="background:#2d1f6e;color:var(--accent-ix)">2</div>
+            <div class="step-body"><strong>Establecer objetivos específicos.</strong> <span>Desde la empresa: control, economía, motivación, simplicidad. Desde el vendedor: regularidad de ingresos, recompensa por desempeño superior, equidad.</span></div>
+          </div>
+          <div class="step">
+            <div class="step-num" style="background:#2d1f6e;color:var(--accent-ix)">3</div>
+            <div class="step-body"><strong>Determinar niveles generales de compensación.</strong> <span>Basados en: habilidades y experiencia requeridas, nivel de puestos comparables en la empresa y en la industria, costo de vida en la zona. Niveles bajos generan alta rotación.</span></div>
+          </div>
+          <div class="step">
+            <div class="step-num" style="background:#2d1f6e;color:var(--accent-ix)">4</div>
+            <div class="step-body"><strong>Desarrollar la mezcla de compensación.</strong> <span>Relación entre sueldo fijo, comisiones y bonos. La mezcla sueldo fijo + comisión + bonos es más eficaz para el logro de objetivos que cualquiera de los métodos en forma aislada. Los incentivos pueden ser: fijos (más fáciles de calcular), progresivos (para economías de escala) o regresivos (cuando se puede sobre-vender al canal).</span></div>
+          </div>
+          <div class="step">
+            <div class="step-num" style="background:#2d1f6e;color:var(--accent-ix)">5</div>
+            <div class="step-body"><strong>Someter el plan a una prueba previa.</strong> <span>Evaluar el impacto sobre utilidades usando cifras históricas. Planificar la comunicación al personal mediante comités de empleados.</span></div>
+          </div>
+          <div class="step">
+            <div class="step-num" style="background:#2d1f6e;color:var(--accent-ix)">6</div>
+            <div class="step-body"><strong>Administrar el plan.</strong> <span>Debe ser justo, fácil de comprender, sencillo de calcular y flexible. Debe considerar problemas ajenos a las ventas (abastecimiento, etc.). Puede ser abierto (todos conocen los criterios) o reservado.</span></div>
+          </div>
+          <div class="step">
+            <div class="step-num" style="background:#2d1f6e;color:var(--accent-ix)">7</div>
+            <div class="step-body"><strong>Evaluar el plan.</strong> <span>Medir efectividad: capacidad para atraer personal deseable, retenerlo y motivarlo hacia los resultados esperados.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10.2 Ventajas y desventajas -->
+  <div class="subsec">
+    <div class="subsec-title">10.2 Ventajas y desventajas de los planes</div>
+
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggle(this)">
+        Sueldo directo — ventajas y desventajas <span class="source-both">DIAPOS + HAIR</span> <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        <table class="cmp-table">
+          <tr><th>Ventajas</th><th>Desventajas</th></tr>
+          <tr>
+            <td>Proporciona seguridad e ingresos regulares al vendedor</td>
+            <td>No proporciona incentivos para esfuerzos extras</td>
+          </tr>
+          <tr>
+            <td>Genera lealtad hacia la empresa</td>
+            <td>Costos pueden incrementarse si no hay ventas</td>
+          </tr>
+          <tr>
+            <td>Flexibilidad en asignaciones territoriales</td>
+            <td>Puede haber inequidad: paga igual al productivo y al no productivo</td>
+          </tr>
+          <tr>
+            <td>Mayor control gerencial sobre el personal</td>
+            <td>Produce desempeño adecuado, no sobresaliente</td>
+          </tr>
+          <tr>
+            <td>Rápida adaptación del personal; administración sencilla</td>
+            <td></td>
+          </tr>
+        </table>
+        <p style="font-size:13px;color:var(--muted);margin-top:0.75rem"><strong>Cuándo es apropiado:</strong> ventas de temporada, ventas en equipo, negociaciones complejas, vendedor como consultor (industria petróleo, química), introducción de nuevos productos, período de aprendizaje.</p>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggle(this)">
+        Comisión directa — ventajas y desventajas <span class="source-both">DIAPOS + HAIR</span> <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        <table class="cmp-table">
+          <tr><th>Ventajas</th><th>Desventajas</th></tr>
+          <tr>
+            <td>Ingreso directamente asociado con productividad</td>
+            <td>Más énfasis en volumen que en rentabilidad</td>
+          </tr>
+          <tr>
+            <td>Cálculo sencillo; sin tope de ganancias potenciales</td>
+            <td>Poca lealtad con la empresa</td>
+          </tr>
+          <tr>
+            <td>Costos proporcionales a las ventas</td>
+            <td>Fluctuaciones de ingreso generan inestabilidad familiar</td>
+          </tr>
+          <tr>
+            <td>Libertad máxima para el vendedor</td>
+            <td>Alta rotación cuando el negocio baja</td>
+          </tr>
+          <tr>
+            <td>El personal de bajo desempeño termina renunciando</td>
+            <td>Se descuidan actividades de servicio al cliente; se puede saturar de stock al canal</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>Pagos desmesurados en condiciones de alza del negocio; poca flexibilidad para dividir territorios</td>
+          </tr>
+        </table>
+        <p style="font-size:13px;color:var(--muted);margin-top:0.75rem"><strong>Elementos a definir:</strong> base de pago (unidades, soles, utilidad), porcentaje de comisión, punto de inicio del pago (primera unidad o desde cuota), momento de pago (pedido / despacho / cobranza).</p>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggle(this)">
+        Plan combinado — ventajas y desventajas <span class="source-both">DIAPOS + HAIR</span> <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        <table class="cmp-table">
+          <tr><th>Ventajas</th><th>Desventajas</th></tr>
+          <tr>
+            <td>Flexibilidad y control sobre el personal de ventas</td>
+            <td>Mayor complejidad de diseño y administración</td>
+          </tr>
+          <tr>
+            <td>Seguridad a la vez que incentivos para desempeño superior</td>
+            <td>Administración más costosa</td>
+          </tr>
+          <tr>
+            <td>Refuerzo continuo e inmediato del comportamiento deseado</td>
+            <td>Puede fracasar si no está bien concebido desde el inicio</td>
+          </tr>
+        </table>
+        <p style="font-size:13px;color:var(--muted);margin-top:0.75rem">Es el método <strong>más ampliamente utilizado</strong>. El bono por desempeño es parte de este grupo: se paga al cumplir una cuota, ganar una cuenta nueva o vender la mezcla deseada. Mientras más cercano al resultado esperado, más refuerza el comportamiento.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10.3 Tendencias -->
+  <div class="subsec">
+    <div class="subsec-title">10.3 Tendencias en la compensación de ventas y beneficios adicionales <span class="source-both">DIAPOS + HAIR</span></div>
+
+    <div class="card-grid">
+      <div class="theory-card">
+        <h4 style="color:var(--accent-x)">Compensación por productividad y retención</h4>
+        <p>La retención de buenos vendedores se ha convertido en un indicador de desempeño para los propios gerentes. Los pagos por productividad también incluyen metas de atracción de nuevos prospectos.</p>
+      </div>
+      <div class="theory-card">
+        <h4 style="color:var(--accent-x)">Satisfacción del cliente en la compensación</h4>
+        <p>Empresas como IBM y Monsanto incorporan índices de satisfacción del cliente en el cálculo de la compensación variable. En Monsanto, el 15% de la compensación depende de la opinión de los clientes.</p>
+      </div>
+      <div class="theory-card">
+        <h4 style="color:var(--accent-x)">Comisiones de gerentes de ventas</h4>
+        <p>Los gerentes ya no solo son evaluados por el volumen anual de su equipo; también deben equilibrar metas de corto plazo con objetivos de largo plazo, control de gastos y rentabilidad.</p>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggle(this)">
+        Tipos de prestaciones o beneficios adicionales <span class="source-diapo">DIAPOS</span> <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        Las prestaciones funcionan especialmente bien en los niveles más altos de la fuerza de ventas. Incluyen: automóvil de la empresa, seguro médico suplementario (EPS), seguro de vida, planes de pensión, educación y viajes, planeación financiera, membresía de clubes, préstamos con bajas tasas, compensación diferida, viajes en primera clase, opciones de acciones. En el contexto peruano, la participación de utilidades es obligatoria por ley.
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggle(this)">
+        Análisis de sensibilidad de costos — sueldo vs comisión vs combinado <span class="source-diapo">DIAPOS</span> <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        El profesor presentó un modelo de comparación de costos con tres planes (A = comisión directa 10%, B = sueldo directo S/. 2500, C = combinado S/. 1200 + 5%): A medida que el volumen de ventas crece, el sueldo directo se vuelve relativamente más barato (porcentaje sobre ventas baja de 25% a 7%). La comisión directa mantiene siempre el mismo porcentaje (10%). El combinado está entre ambos. El punto de equilibrio entre A y B en el ejemplo del profesor es a los S/. 25,000 de ventas. Por encima de ese monto, el sueldo directo es más barato que la comisión directa.
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     TAB XI — EVALUACIÓN Y DESEMPEÑO
+════════════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-xi">
+<div class="container">
+
+  <div class="section-head">
+    <span class="section-num num-xi">TEMA XI</span>
+    <h2>Evaluación y Desempeño de la Fuerza de Ventas</h2>
+  </div>
+
+  <div class="alert alert-green">
+    <div class="alert-label">Definición central <span class="source-both">DIAPOS + HAIR CAP. 14</span></div>
+    Evaluación de desempeño: proceso sistemático para (1) establecer si un comportamiento contribuye al logro de los objetivos organizacionales y (2) proporcionar retroalimentación al colaborador. Su propósito es descubrir desviaciones entre metas y logros, e idear e implementar métodos correctivos.
+  </div>
+
+  <!-- Evaluación de desempeño -->
+  <div class="subsec">
+    <div class="subsec-title">13.1 Evaluación de desempeño — contribuciones y retos</div>
+
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggle(this)">
+        Contribuciones de la evaluación a la gestión <span class="source-both">DIAPOS + HAIR</span> <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        <ul class="content-list">
+          <li>Reconocer al personal destacado (compensación, premios, promociones o despidos).</li>
+          <li>Identificar necesidades de capacitación.</li>
+          <li>Anticipar necesidades futuras de personal.</li>
+          <li>Establecer criterios para seleccionar nuevo personal.</li>
+          <li>Asesorar al personal de ventas en sus carreras.</li>
+          <li>Revisar estándares de desempeño, políticas y procedimientos.</li>
+          <li>Mejorar el desempeño futuro.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggle(this)">
+        Retos de las evaluaciones (5 retos del profesor) <span class="source-diapo">DIAPOS</span> <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        <ol style="padding-left:1.25rem;font-size:13.5px;line-height:2">
+          <li>Poco contacto entre gerente y vendedor.</li>
+          <li>Asimetría de la información, que genera conductas disfuncionales.</li>
+          <li>Dificultad para discriminar la importancia de numerosas tareas al evaluar.</li>
+          <li>Al gerente le desagrada la tarea y no le da importancia — aunque aclara roles y responsabilidades.</li>
+          <li>Existen factores fuera del control del vendedor que influyen en el resultado: disparidades en el potencial del territorio, apoyo de la empresa, período de aclimatación, intensidad de la competencia.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tres tipos de criterios -->
+  <div class="subsec">
+    <div class="subsec-title">Tres tipos de criterios de evaluación <span class="source-both">DIAPOS + HAIR CAP. 14</span></div>
+
+    <div class="alert alert-green">
+      <div class="alert-label">Alta probabilidad de evaluación — Hair Cap. 14 desarrolla esto en detalle</div>
+      Los tres tipos de medidas coexisten en la práctica: los gerentes adoptan un método híbrido que maximiza las fortalezas y reduce las limitaciones de cada uno.
+    </div>
+
+    <div class="card-grid">
+      <div class="theory-card" style="border-color:var(--accent-xi)">
+        <h4 style="color:var(--accent-xi)">1. Medidas basadas en resultados</h4>
+        <p>Cuantitativas y objetivas. Incluyen: volumen de ventas (en dinero y unidades), porcentaje de cuota alcanzada, participación de mercado, margen bruto, margen de contribución, número de pedidos, cuentas nuevas, cuentas perdidas, gastos de ventas. Requieren poca supervisión directa.</p>
+      </div>
+      <div class="theory-card" style="border-color:var(--accent-xiv)">
+        <h4 style="color:var(--accent-xiv)">2. Medidas basadas en el comportamiento</h4>
+        <p>Cualitativas y subjetivas. Incluyen: administración del territorio, seguimiento con clientes, uso de materiales promocionales, preparación de informes oportunos, inteligencia de marketing. El vendedor "hace la labor", no solo vende.</p>
+      </div>
+      <div class="theory-card" style="border-color:var(--accent-x)">
+        <h4 style="color:var(--accent-x)">3. Medidas de desarrollo profesional</h4>
+        <p>Efecto a largo plazo. Incluyen: habilidades profesionales (conocimiento del producto, técnicas de venta), conocimientos (políticas de la empresa, estrategias de competidores) y características personales (entusiasmo, motivación, buen juicio, código ético). Son las más utilizadas según Hair.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cuotas -->
+  <div class="subsec">
+    <div class="subsec-title">13.2 Cuotas de ventas <span class="source-both">DIAPOS + HAIR CAP. 14</span></div>
+
+    <div class="def-box">
+      <div class="def-term">Cuota de venta:</div> Meta asignada en un período determinado a una unidad de venta (región, distrito, sucursal, territorio o vendedor individual).
+      <div class="def-src">Diapositivas Sesión 12 / Hair Cap. 14</div>
+    </div>
+
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggle(this)">
+        Propósitos de las cuotas <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        Motivar al personal (la meta es un incentivo y un reto), contar con estándares cuantitativos de desempeño, controlar y dirigir actividades, evaluar el desempeño, ayudar a controlar gastos. Para ser eficaces deben ser: alcanzables, claras y precisas, basadas en datos objetivos, fáciles de administrar, flexibles, equitativas, y que permitan retroalimentación.
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggle(this)">
+        Los 4 tipos de cuotas <span class="source-both">DIAPOS + HAIR CAP. 14</span> <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        <table class="cmp-table">
+          <tr>
+            <th>Tipo</th>
+            <th>Variantes</th>
+            <th>Cuándo usar</th>
+          </tr>
+          <tr>
+            <td><strong>Volumen de ventas</strong></td>
+            <td>En dinero; en unidades; en puntos</td>
+            <td>El más común. Cuota en dinero cuando hay muchos productos con precios estables. En unidades cuando los artículos son muy costosos. En puntos para evitar que el vendedor solo venda lo fácil.</td>
+          </tr>
+          <tr>
+            <td><strong>Financieras</strong></td>
+            <td>De gastos; de utilidades (margen bruto, margen de contribución, utilidad neta)</td>
+            <td>Cuando la gerencia necesita que el vendedor piense en rentabilidad, no solo en volumen.</td>
+          </tr>
+          <tr>
+            <td><strong>Actividades</strong></td>
+            <td>Clientes visitados, demostraciones, exhibidores colocados, capacitaciones realizadas</td>
+            <td>Cuando el ciclo de venta es largo y los resultados tardan meses.</td>
+          </tr>
+          <tr>
+            <td><strong>Combinadas</strong></td>
+            <td>Mezcla de las anteriores con ponderación</td>
+            <td>Cuando la gerencia necesita controlar múltiples dimensiones simultáneamente. Son las más difíciles de administrar.</td>
+          </tr>
+        </table>
+        <p style="font-size:13px;color:var(--muted);margin-top:0.75rem">Cuotas de utilidades: margen bruto = ventas − costo de bienes vendidos. Margen de contribución = margen bruto − gastos directos de ventas. Utilidad neta = ventas − costo de bienes vendidos − gastos directos − gastos indirectos.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Plan de ventas -->
+  <div class="subsec">
+    <div class="subsec-title">13.3 El plan de ventas <span class="source-both">DIAPOS + HAIR CAP. 14</span></div>
+    <div class="def-box">
+      El plan de ventas permite tener un mapa para llegar al objetivo deseado y los recursos que se utilizarán. Comprende cuatro partes:
+      <ul class="content-list" style="margin-top:0.5rem">
+        <li><strong>Análisis de situación:</strong> ¿Dónde estamos? (tamaño de mercado, dinámica, participación, fortalezas y debilidades).</li>
+        <li><strong>Oportunidades y amenazas:</strong> ¿A dónde queremos ir? (eventos externos, supuestos internos y externos, pronóstico de ventas).</li>
+        <li><strong>Programa de acción:</strong> ¿Cómo llegamos? (estrategias, tácticas, recursos, cuotas, presupuesto).</li>
+        <li><strong>Sistemas de evaluación:</strong> ¿Cuánto progreso estamos haciendo? (estándares, monitoreo, acciones correctivas).</li>
+      </ul>
+      <div class="def-src">Fuente: Hair Cap. 14 (Tabla 14.1) / Diapositivas Sesión 12</div>
+    </div>
+  </div>
+
+  <!-- Técnicas de evaluación -->
+  <div class="subsec">
+    <div class="subsec-title">13.4 Técnicas de evaluación del desempeño <span class="source-both">DIAPOS + HAIR CAP. 14</span></div>
+
+    <div class="alert alert-green">
+      <div class="alert-label">Cuatro técnicas — alta probabilidad de evaluación</div>
+      Hair Cap. 14 desarrolla extensamente las cuatro técnicas. Las diapositivas del profesor también las cubren todas. Domina las características, ventajas y desventajas de cada una.
+    </div>
+
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggle(this)">
+        1. Declaraciones descriptivas <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        Respuestas breves a una serie de criterios específicos (conocimiento del puesto, administración de territorio, relaciones con clientes, cualidades personales, resultados de ventas). También puede ser una descripción tipo ensayo. Su limitación principal es la subjetividad tanto en la redacción como en la interpretación; muchos evaluadores son en exceso estrictos, indulgentes o neutrales.
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggle(this)">
+        2. Escalas gráficas de calificación <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        El gerente asigna un valor de escala a diversas características o resultados. Dos formatos principales:
+        <ul class="content-list">
+          <li><strong>Diferencial semántico:</strong> extremos polares bipolares (Deficiente — Excelente), generalmente con 5 o 7 segmentos.</li>
+          <li><strong>Escala Likert:</strong> anclas descriptivas bajo cada segmento (Insatisfactorio / Inferior al promedio / Promedio / Superior al promedio / Sobresaliente).</li>
+        </ul>
+        Limitación: las palabras de soporte son vagas por la interpretación subjetiva del evaluador.
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggle(this)">
+        3. BARS — Escalas de calificación basadas en el comportamiento <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        Se centran en medir conductas específicas que se consideran fundamentales para el desempeño y que el vendedor puede controlar. Son más objetivas que las escalas gráficas porque los factores de calificación tienen interpretaciones similares entre evaluadores.
+        <br><br><strong>4 pasos para construir BARS:</strong>
+        <div class="steps" style="margin-top:0.75rem">
+          <div class="step">
+            <div class="step-num" style="background:#0f3028;color:var(--accent-xi)">1</div>
+            <div class="step-body"><strong>Identificar incidentes críticos.</strong> <span>Gerentes, vendedores y clientes describen ejemplos reales de comportamiento eficaz e ineficaz. Pueden obtenerse más de 100 incidentes que luego se condensan.</span></div>
+          </div>
+          <div class="step">
+            <div class="step-num" style="background:#0f3028;color:var(--accent-xi)">2</div>
+            <div class="step-body"><strong>Depurar para establecer dimensiones del desempeño.</strong> <span>Se reducen a entre 5 y 12 dimensiones. Un incidente se conserva si el 60% o más del grupo lo asigna a la misma dimensión.</span></div>
+          </div>
+          <div class="step">
+            <div class="step-num" style="background:#0f3028;color:var(--accent-xi)">3</div>
+            <div class="step-body"><strong>Calificar la eficacia de las conductas.</strong> <span>Se califica en escala de 0 a 10. Se conservan los incidentes con menor desviación estándar (mayor acuerdo entre evaluadores).</span></div>
+          </div>
+          <div class="step">
+            <div class="step-num" style="background:#0f3028;color:var(--accent-xi)">4</div>
+            <div class="step-body"><strong>Seleccionar el grupo final de incidentes.</strong> <span>La escala BARS final tiene escalas verticales por dimensión, con 6 u 8 incidentes cada una.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggle(this)">
+        4. APO — Administración por objetivos <span class="source-both">DIAPOS + HAIR CAP. 14</span> <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        Programa donde el gerente y el vendedor acuerdan conjuntamente metas específicas para el siguiente período, con retroalimentación sobre el progreso. Convierte los objetivos organizacionales en objetivos individuales específicos.
+        <br><br><strong>4 principios de la APO (Hair):</strong>
+        <ul class="content-list">
+          <li><strong>Comunicación abierta:</strong> libre intercambio que produce compromisos realistas.</li>
+          <li><strong>Participación y acuerdo mutuo:</strong> el vendedor participa de lleno sin inhibiciones.</li>
+          <li><strong>Coincidencia de metas:</strong> las metas personales se integran a las organizacionales.</li>
+          <li><strong>Recompensas por desempeño:</strong> reconocimiento público y mayor compensación para quienes tienen desempeño destacado.</li>
+        </ul>
+        <strong>Ciclo de la APO (4 pasos):</strong> (1) establecer objetivos → (2) elaborar e implementar plan de ventas → (3) monitorear periódicamente el desempeño → (4) realizar evaluación anual y reiniciar el ciclo.
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggle(this)">
+        Retroalimentación — tres métodos <span class="source-both">DIAPOS + HAIR</span> <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        La retroalimentación debe ser oportuna, explícita y significativa. Tres métodos:
+        <ul class="content-list">
+          <li><strong>Decir y convencer:</strong> el gerente presenta su evaluación y argumenta por qué es correcta.</li>
+          <li><strong>Decir y escuchar:</strong> el gerente presenta la evaluación y luego escucha la reacción del vendedor.</li>
+          <li><strong>Solución de problemas:</strong> el gerente y el vendedor trabajan juntos para identificar causas y acciones correctivas.</li>
+        </ul>
+        Los buenos vendedores se benefician del reconocimiento porque aumenta autoestima, autoconfianza y motivación. Los vendedores deficientes también necesitan retroalimentación inmediata sobre cómo mejorar.
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggle(this)">
+        Evaluación de 360 grados — perspectiva del siglo 21 <span class="source-hair">HAIR CAP. 14</span> <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        Sistema que solicita información sobre habilidades, capacidades y conductas del vendedor a todas las partes con las que tiene contacto continuo: gerente, colegas del equipo, subordinados, otros departamentos, gerentes de compras de clientes, y el propio vendedor (autoevaluación). Las calificaciones son confidenciales para recolectar información sincera. Permite captar información que otros métodos no obtienen, especialmente desde la perspectiva del cliente.
+      </div>
+    </div>
+  </div>
+
+  <!-- Auditoría -->
+  <div class="subsec">
+    <div class="subsec-title">13.5 Auditoría del proceso de ventas <span class="source-diapo">DIAPOS</span></div>
+    <div class="card-grid">
+      <div class="theory-card">
+        <h4 style="color:var(--accent-xi)">Auditoría de metas y objetivos</h4>
+        <p>Verifica consistencia entre las metas y objetivos de ventas y los de la organización; evalúa si el equipo los comprende.</p>
+      </div>
+      <div class="theory-card">
+        <h4 style="color:var(--accent-xi)">Auditoría de políticas</h4>
+        <p>Revisión periódica de políticas de ventas internas y externas para asegurar que sean vigentes.</p>
+      </div>
+      <div class="theory-card">
+        <h4 style="color:var(--accent-xi)">Auditoría de estrategias y tácticas</h4>
+        <p>Evalúa si las estrategias aprovechan las oportunidades del mercado y enfrentan los retos actuales.</p>
+      </div>
+      <div class="theory-card">
+        <h4 style="color:var(--accent-xi)">Auditoría de la organización de ventas</h4>
+        <p>Evalúa la capacidad de la organización de implementar las estrategias y tácticas requeridas.</p>
+      </div>
+      <div class="theory-card">
+        <h4 style="color:var(--accent-xi)">Auditoría de productividad</h4>
+        <p>Compara utilidades generadas versus costos de ventas, por cliente, por línea de producto, por vendedor.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     TAB XIV — TECNOLOGÍA
+════════════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-xiv">
+<div class="container">
+
+  <div class="section-head">
+    <span class="section-num num-xiv">TEMA XIV</span>
+    <h2>Impacto de la Tecnología en la Administración de Ventas</h2>
+  </div>
+
+  <div class="alert alert-amber">
+    <div class="alert-label">Estructura del tema <span class="source-diapo">DIAPOS SESIÓN 13</span></div>
+    Cuatro bloques: (1) naturaleza cambiante del entorno de ventas y tecnologías de información, (2) comercio electrónico y sus niveles, (3) automatización de la fuerza de ventas (SFA), (4) CRM y herramientas de apoyo.
+  </div>
+
+  <!-- 14.1 Entorno tecnológico -->
+  <div class="subsec">
+    <div class="subsec-title">14.1 La naturaleza cambiante del entorno de ventas</div>
+
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggle(this)">
+        Tecnologías de información e inalámbricas en ventas <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        <table class="cmp-table">
+          <tr>
+            <th>Área</th>
+            <th>Herramientas</th>
+          </tr>
+          <tr>
+            <td><strong>Ventas de campo</strong></td>
+            <td>Inventario de productos, sistemas de precios, acceso a información de clientes, pedidos remotos</td>
+          </tr>
+          <tr>
+            <td><strong>Oficina móvil</strong></td>
+            <td>Correo corporativo, administración de información personal (AIP), acceso a intranet, sistemas de RRHH</td>
+          </tr>
+          <tr>
+            <td><strong>Servicios de campo</strong></td>
+            <td>Programación de órdenes de trabajo, acceso a registros de clientes, acceso a quejas</td>
+          </tr>
+          <tr>
+            <td><strong>Administración de flotilla</strong></td>
+            <td>Sistemas de despacho, programación de llamadas, aplicaciones de seguimiento y localización, sistemas de rutas</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- 14.2 E-commerce -->
+  <div class="subsec">
+    <div class="subsec-title">14.2 Comercio electrónico — 5 niveles <span class="source-diapo">DIAPOS</span></div>
+
+    <div class="alert alert-amber">
+      <div class="alert-label">Alta probabilidad de evaluación — secuencia de niveles</div>
+      El profesor presentó los 5 niveles como una progresión de profundidad de integración. Domina qué hace cada nivel y un ejemplo.
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num" style="background:#3a2800;color:var(--accent-xiv)">1</div>
+        <div class="step-body"><strong>Publicar.</strong> <span>Transmitir información al cliente de manera electrónica: boletines, informes anuales, comunicados, catálogos de producto y atención al cliente.</span></div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:#3a2800;color:var(--accent-xiv)">2</div>
+        <div class="step-body"><strong>Interactuar.</strong> <span>Apoyo técnico en línea: correo electrónico, chat, chatbots. Comunicación bidireccional pero sin transacción.</span></div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:#3a2800;color:var(--accent-xiv)">3</div>
+        <div class="step-body"><strong>Efectuar transacciones.</strong> <span>Portal de ecommerce o marketplace. Gestión de cuentas, inventario de productos, ventas cruzadas, manejo de recomendaciones. Ejemplos: tiendas en línea propias.</span></div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:#3a2800;color:var(--accent-xiv)">4</div>
+        <div class="step-body"><strong>Integrar sistemas y procesos comerciales.</strong> <span>Los sistemas de internet se integran con sistemas internos (ventas, entregas, contabilidad). Los sistemas del proveedor y el cliente se integran para generar pedidos automáticamente. Ejemplo: Raytheon transfiere datos entre empresa y socios. Genera nuevos roles para la fuerza de ventas y omnicanalidad.</span></div>
+      </div>
+      <div class="step">
+        <div class="step-num" style="background:#3a2800;color:var(--accent-xiv)">5</div>
+        <div class="step-body"><strong>E-procurement.</strong> <span>Adquisiciones electrónicas: integración total de la cadena de suministro en la compra. Automatización de las compras empresariales.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 14.3 SFA -->
+  <div class="subsec">
+    <div class="subsec-title">14.3 Automatización de la Fuerza de Ventas (SFA)</div>
+
+    <div class="def-box">
+      <div class="def-term">SFA — Sales Force Automation</div>
+      Conjunto de tecnologías que automatizan las actividades de la fuerza de ventas: gestión de contactos, seguimiento de oportunidades, reportes de actividad, generación de cotizaciones, y acceso a información de clientes desde dispositivos móviles.
+      <p style="margin-top:0.75rem;font-size:13px;color:var(--muted)">Uno de los desarrollos en SFA es la creación de <strong>espacios de venta centrados en el cliente</strong>: lugares de compra sin intervención de la fuerza de ventas para compras habituales, y catálogos de mercado abierto con información de precios y productos (ejemplo: Amazon Business).</p>
+      <div class="def-src">Fuente: Diapositivas Sesión 13</div>
+    </div>
+  </div>
+
+  <!-- 14.4 CRM -->
+  <div class="subsec">
+    <div class="subsec-title">14.4 Administración de las relaciones con el cliente (CRM)</div>
+
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggle(this)">
+        Ideas clave para implementar CRM <span class="source-diapo">DIAPOS</span> <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        <ul class="content-list">
+          <li>Coordinar el mensaje e imagen de forma unificada en todos los canales.</li>
+          <li>Coordinar fuerza de ventas directas, centros de llamadas, sitios web, email, distribuidores.</li>
+          <li>Organizar todo en torno al cliente, no en torno al producto o proceso interno.</li>
+          <li>Base de datos común: los mismos datos disponibles para todas las áreas.</li>
+          <li>Manejar los cambios culturales después de la implantación.</li>
+          <li>Involucrar a los usuarios desde el inicio.</li>
+          <li>Asegurar el contacto cara a cara entre el personal de marketing, ventas y TI.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggle(this)">
+        El cliente correcto — estrategia CRM <span class="source-diapo">DIAPOS</span> <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        Enfoque en el cliente correcto implica: definir objetivos específicos por segmento, comprender el comportamiento del consumidor (transaccional vs relacional), definir una estrategia de precios (el más bajo vs la mejor oferta), crear oportunidades interactivas con el cliente, desarrollar relaciones de largo plazo, y medir los resultados obtenidos.
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggle(this)">
+        Plataformas de CRM — Salesforce y Oracle Sales Cloud <span class="source-diapo">DIAPOS</span> <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        <table class="cmp-table">
+          <tr>
+            <th>Funcionalidad</th>
+            <th>Salesforce</th>
+            <th>Oracle Sales Cloud</th>
+          </tr>
+          <tr>
+            <td>Gestión de clientes</td>
+            <td>Gestión de cuentas y contactos (secretarias, gerentes de compra, jefes); editar o eliminar cuentas</td>
+            <td>Visión completa del cliente: historial de servicio, gestión de pedidos, perfil de cuenta</td>
+          </tr>
+          <tr>
+            <td>Territorios</td>
+            <td>Gerente puede asignar cuentas y controlar información del vendedor por cliente</td>
+            <td>Gestión de territorios y oportunidades</td>
+          </tr>
+          <tr>
+            <td>Análisis</td>
+            <td>Módulo para actualizar datos de clientes y gestionar prospectos</td>
+            <td>Información en tiempo real sobre ventas y rendimiento; módulo de cotizaciones y propuestas</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <button class="acc-trigger" onclick="toggle(this)">
+        Resumen de aplicaciones tecnológicas al apoyo de ventas <span class="source-diapo">DIAPOS</span> <span class="acc-arrow">▼</span>
+      </button>
+      <div class="acc-body">
+        <strong>Apoyo a las actividades de ventas:</strong> venta de campo (dispositivos móviles), oficina móvil, automatización de funciones administrativas, e-commerce y adquisiciones electrónicas, CRM.<br><br>
+        <strong>Administración de ventas:</strong> administración del canal de distribución, medición de la efectividad de la fuerza de ventas, optimización de territorios.
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     TAB QUIZ
+════════════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-quiz">
+<div class="container">
+
+  <div class="section-head">
+    <span class="section-num" style="background:#2a0a3e;color:#e879f9;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;border-radius:6px;">PRÁCTICA</span>
+    <h2>Preguntas de Examen</h2>
+  </div>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:2rem">Preguntas de desarrollo corto y aplicación de caso, construidas a partir del material del profesor y Hair et al. Responde mentalmente y luego revela la respuesta modelo.</p>
+
+  <!-- Q1 -->
+  <div class="quiz-item">
+    <div class="quiz-tag qt-ix">IX · Motivación</div>
+    <div class="quiz-q">1. Un gerente de ventas de una empresa de seguros nota que su vendedor estrella, José, ha reducido su esfuerzo notoriamente desde que contrató a un colega con un territorio más favorable que genera comisiones similares con menos trabajo. ¿Qué teoría explica mejor el comportamiento de José? ¿Qué debe hacer el gerente?</div>
+    <button class="reveal-btn" onclick="revealAnswer(this)">Ver respuesta modelo</button>
+    <div class="answer-box">
+      <div class="answer-label">Respuesta modelo</div>
+      La situación de José es explicada por la <strong>Teoría de la Equidad</strong>: José compara su contribución (esfuerzo en territorio difícil) y su recompensa (comisión) con las de su colega (menor esfuerzo, comisión similar). Al percibir inequidad, reduce su esfuerzo para "equilibrar" la ecuación desde su perspectiva. Complementariamente, la <strong>Teoría de la Expectativa</strong> también aplica: la instrumentalidad de José (percepción de que su esfuerzo conduce a una recompensa superior) se ha debilitado. El gerente debe: (1) revisar si los territorios tienen realmente potencial dispar y ajustar las cuotas de forma más equitativa; (2) comunicar abiertamente la situación con José; (3) considerar incentivos adicionales para el territorio difícil, como bonos por cuentas nuevas.
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="quiz-item">
+    <div class="quiz-tag qt-ix">IX · Motivación</div>
+    <div class="quiz-q">2. Diferencia operativa entre Herzberg y Maslow en el diseño de un plan de incentivos para vendedores. ¿Por qué un aumento de sueldo, según Herzberg, no necesariamente aumenta la motivación?</div>
+    <button class="reveal-btn" onclick="revealAnswer(this)">Ver respuesta modelo</button>
+    <div class="answer-box">
+      <div class="answer-label">Respuesta modelo</div>
+      Maslow ordena las necesidades en una jerarquía donde la satisfacción de un nivel activa el siguiente. Herzberg, en cambio, distingue dos categorías independientes: los <strong>factores higiénicos</strong> (remuneración, condiciones de trabajo, seguridad) solo evitan la insatisfacción cuando están presentes, pero su ausencia genera insatisfacción — no actúan como motivadores. Los <strong>factores motivacionales</strong> (responsabilidad, logro, reconocimiento, crecimiento) son los que realmente generan satisfacción y elevan el desempeño. Por tanto, un aumento de sueldo es un factor higiénico: si el sueldo era inequitativo, corregirlo elimina una fuente de insatisfacción, pero no produce motivación positiva. Para motivar genuinamente, el gerente debe agregar reconocimiento, responsabilidad creciente y oportunidades de desarrollo.
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="quiz-item">
+    <div class="quiz-tag qt-x">X · Compensación</div>
+    <div class="quiz-q">3. Una empresa de distribución de alimentos en Lima está evaluando tres planes de compensación: (A) comisión directa del 8%, (B) sueldo fijo de S/. 2,800 mensuales, (C) sueldo de S/. 1,500 + comisión del 5%. ¿Cuál recomendarías si el objetivo de la empresa es controlar los costos en escenarios de bajo volumen y maximizar el esfuerzo cuando las ventas son altas? Justifica.</div>
+    <button class="reveal-btn" onclick="revealAnswer(this)">Ver respuesta modelo</button>
+    <div class="answer-box">
+      <div class="answer-label">Respuesta modelo</div>
+      Se recomienda el <strong>plan combinado (C)</strong>. En escenarios de bajo volumen, el costo del sueldo fijo de S/. 2,800 (plan B) puede ser desproporcionado respecto a las ventas generadas. El plan combinado (C) reduce el componente fijo a S/. 1,500 y agrega un componente variable del 5%, lo que garantiza que el costo de ventas sea proporcional al volumen real. Además, la parte variable incentiva al vendedor a incrementar su esfuerzo en períodos de mayor demanda sin el riesgo de incurrir en pagos desmesurados que tendría el plan A (que en escenarios de alza del negocio puede generar comisiones exageradas). El plan B no ofrece incentivos para esfuerzo extra. La mezcla sueldo fijo + comisión es, según Hair, el método más ampliamente utilizado precisamente porque equilibra seguridad para el vendedor y control de costos para la empresa.
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="quiz-item">
+    <div class="quiz-tag qt-x">X · Compensación</div>
+    <div class="quiz-q">4. ¿Cuáles son las siete etapas del desarrollo de un plan de compensación según Hair? Explica brevemente en qué consiste la etapa de "mezcla de compensación" y qué tipos de incentivos existen según las diapositivas.</div>
+    <button class="reveal-btn" onclick="revealAnswer(this)">Ver respuesta modelo</button>
+    <div class="answer-box">
+      <div class="answer-label">Respuesta modelo</div>
+      Las siete etapas son: (1) elaborar la descripción de puestos, (2) establecer objetivos específicos, (3) determinar los niveles generales de compensación, (4) desarrollar la mezcla de compensación, (5) someter el plan a una prueba previa, (6) administrar el plan, y (7) evaluar el plan.<br><br>
+      La <strong>mezcla de compensación</strong> es la relación entre los componentes fijos y variables del paquete: sueldo, comisiones y bonos. La investigación indica que una mezcla de los tres es más eficaz para el logro de objetivos que cualquier método en forma aislada. El vendedor debe recibir suficiente componente fijo para cubrir sus costos de vida, pero no tanta seguridad como para dejar de esforzarse. Los tipos de incentivos son: <strong>fijos</strong> (comisiones y bonos con porcentaje constante, fáciles de calcular), <strong>progresivos</strong> (el porcentaje aumenta con el volumen, para aprovechar economías de escala), y <strong>regresivos</strong> (el porcentaje baja al crecer el volumen, para evitar sobre-venta al canal o pagos desmesurados en períodos de alza).
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="quiz-item">
+    <div class="quiz-tag qt-xi">XI · Evaluación</div>
+    <div class="quiz-q">5. Explica las diferencias entre las tres medidas de evaluación del desempeño de la fuerza de ventas según Hair. ¿Por qué los gerentes tienden a preferir un método híbrido?</div>
+    <button class="reveal-btn" onclick="revealAnswer(this)">Ver respuesta modelo</button>
+    <div class="answer-box">
+      <div class="answer-label">Respuesta modelo</div>
+      Las <strong>medidas basadas en resultados</strong> son cuantitativas y objetivas: volumen de ventas, participación de mercado, margen bruto, número de pedidos, cuentas nuevas. Son fáciles de medir y comparar, pero pueden distorsionarse por factores fuera del control del vendedor (territorio, temporada, apoyo de la empresa). Las <strong>medidas basadas en el comportamiento</strong> son cualitativas: administración del territorio, seguimiento de clientes, preparación de informes, inteligencia de marketing. Evalúan el proceso, no solo el resultado, pero son subjetivas. Las <strong>medidas de desarrollo profesional</strong> evalúan el potencial a largo plazo: habilidades de venta, conocimiento del producto y los competidores, y características personales. Son las más utilizadas por los gerentes, según Hair.<br><br>
+      El método híbrido es preferido porque ninguna categoría por sí sola ofrece una evaluación completa: los resultados no reflejan el esfuerzo ni el comportamiento; el comportamiento no garantiza resultados; el desarrollo profesional no se traduce en desempeño inmediato. La combinación maximiza las fortalezas de cada criterio y reduce sus limitaciones.
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="quiz-item">
+    <div class="quiz-tag qt-xi">XI · Evaluación</div>
+    <div class="quiz-q">6. ¿Qué son las escalas BARS? Describe los 4 pasos para construirlas y señala por qué son superiores a las escalas gráficas de calificación tradicionales.</div>
+    <button class="reveal-btn" onclick="revealAnswer(this)">Ver respuesta modelo</button>
+    <div class="answer-box">
+      <div class="answer-label">Respuesta modelo</div>
+      BARS (Behaviorally Anchored Rating Scales) son escalas de calificación basadas en el comportamiento, que se centran en medir conductas específicas consideradas fundamentales para el desempeño y que el vendedor puede controlar. Los 4 pasos para construirlas: (1) identificar incidentes críticos de comportamiento eficaz e ineficaz, aportados por gerentes, vendedores y clientes; (2) depurar esos incidentes para establecer entre 5 y 12 dimensiones del desempeño, conservando los que el 60% del grupo asigna a la misma dimensión; (3) calificar la eficacia de las conductas en una escala de 0 a 10, conservando los de menor desviación estándar; (4) seleccionar 6 u 8 incidentes por dimensión para construir la escala final vertical.<br><br>
+      Son superiores a las escalas gráficas porque las palabras de soporte en estas últimas son vagas e interpretadas de forma diferente por cada evaluador (subjetividad excesiva). Las BARS tienen interpretaciones similares entre evaluadores porque los factores de calificación son conductas concretas y específicas, lo que permite mayor objetividad y consistencia.
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="quiz-item">
+    <div class="quiz-tag qt-xiv">XIV · Tecnología</div>
+    <div class="quiz-q">7. Describe los 5 niveles del comercio electrónico presentados en clase. ¿En qué nivel se ubica una empresa como Procter & Gamble que integra sus sistemas de pedidos directamente con los sistemas de abastecimiento de Walmart?</div>
+    <button class="reveal-btn" onclick="revealAnswer(this)">Ver respuesta modelo</button>
+    <div class="answer-box">
+      <div class="answer-label">Respuesta modelo</div>
+      Los 5 niveles son: (1) <strong>Publicar</strong>: transmitir información de forma unilateral al cliente (boletines, catálogos, comunicados). (2) <strong>Interactuar</strong>: comunicación bidireccional sin transacción, mediante email, chat o chatbots. (3) <strong>Efectuar transacciones</strong>: portal propio de ecommerce o marketplace con gestión de cuentas, inventario y ventas cruzadas. (4) <strong>Integrar</strong>: los sistemas de internet se integran con sistemas internos (ventas, entregas, contabilidad) y con los sistemas del proveedor y el cliente para generar pedidos automáticamente. (5) <strong>E-procurement</strong>: adquisiciones electrónicas con automatización total de la cadena de suministro en la compra.<br><br>
+      El caso de P&G con Walmart corresponde al <strong>Nivel 4 (Integrar)</strong>, donde los sistemas de ambas empresas se conectan para generar necesidades y pedidos de manera electrónica. Las diapositivas citan el caso de Raytheon como ejemplo de este nivel de integración.
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="quiz-item">
+    <div class="quiz-tag qt-int">Integrador</div>
+    <div class="quiz-q">8. Pregunta integradora: Una empresa como Alicorp decide revisar su sistema de compensación para su fuerza de ventas en canales tradicionales. ¿Cómo se conectan los conceptos de motivación (Tema IX), compensación (Tema X) y evaluación de desempeño (Tema XI) en el diseño de una solución integral?</div>
+    <button class="reveal-btn" onclick="revealAnswer(this)">Ver respuesta modelo</button>
+    <div class="answer-box">
+      <div class="answer-label">Respuesta modelo</div>
+      El punto de partida es la motivación: las teorías de contenido (Maslow, ERG, Herzberg) identifican qué necesita cada vendedor en cada etapa de su carrera. La teoría de la expectativa (proceso) explica que el vendedor se esforzará solo si percibe que su esfuerzo conduce a un resultado y que ese resultado conduce a una recompensa atractiva.<br><br>
+      Esa lógica de motivación se operacionaliza en el plan de compensación: Alicorp debe diseñar una mezcla que (1) asegure regularidad de ingresos (componente fijo que cubra costos de vida), (2) recompense el desempeño superior (componente variable), y (3) sea percibida como equitativa en toda la fuerza de ventas. Las 7 etapas de Hair guían el diseño.<br><br>
+      La evaluación de desempeño cierra el ciclo: sin métricas claras (cuotas de volumen, financieras y de actividades) no es posible determinar quién merece la recompensa variable ni identificar necesidades de capacitación. La APO alinea las metas del vendedor con las de la organización y proporciona retroalimentación continua que reactivar el ciclo motivacional. La tecnología (CRM como Salesforce) provee los datos en tiempo real para hacer esta evaluación de forma objetiva y oportuna.
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     TAB MAPA INTEGRADOR
+════════════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-mapa">
+<div class="container">
+
+  <div class="section-head">
+    <span class="section-num" style="background:#1a2030;color:#94a3b8;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;border-radius:6px;">SÍNTESIS</span>
+    <h2>Mapa Integrador de los 4 Temas</h2>
+  </div>
+
+  <div class="map-box">
+    <div class="map-title">Flujo lógico entre temas</div>
+    <div class="map-flow">
+      <div class="map-node mn-ix">IX. Motivación<br><small style="font-weight:400">¿Qué mueve al vendedor?</small></div>
+      <div class="map-arrow">→</div>
+      <div class="map-node mn-x">X. Compensación<br><small style="font-weight:400">¿Cómo se recompensa?</small></div>
+      <div class="map-arrow">→</div>
+      <div class="map-node mn-xi">XI. Evaluación<br><small style="font-weight:400">¿Cómo se mide?</small></div>
+      <div class="map-arrow">→</div>
+      <div class="map-node mn-xiv">XIV. Tecnología<br><small style="font-weight:400">¿Qué herramientas apoyan?</small></div>
+    </div>
+  </div>
+
+  <div class="card-grid">
+    <div class="map-box" style="margin-bottom:0">
+      <div class="map-title" style="color:var(--accent-ix)">IX → X</div>
+      <p style="font-size:13px;line-height:1.7">La motivación identifica qué necesita cada vendedor (teorías de contenido y proceso). La compensación es la herramienta principal para responder a esas necesidades: el plan de compensación es el "volante" gerencial. Las teorías de Herzberg y la expectativa guían qué tipo de componente (fijo vs variable) debe predominar.</p>
+    </div>
+    <div class="map-box" style="margin-bottom:0">
+      <div class="map-title" style="color:var(--accent-x)">X → XI</div>
+      <p style="font-size:13px;line-height:1.7">El plan de compensación depende de métricas claras de desempeño para saber a quién y cuánto pagar. Las cuotas (de volumen, financieras, de actividades) son la base cuantitativa que conecta la compensación variable con la evaluación objetiva. La APO formaliza el ciclo de acuerdo entre gerente y vendedor.</p>
+    </div>
+    <div class="map-box" style="margin-bottom:0">
+      <div class="map-title" style="color:var(--accent-xi)">XI → XIV</div>
+      <p style="font-size:13px;line-height:1.7">La evaluación del desempeño requiere datos en tiempo real y sistemas de información robustos. Los CRM (Salesforce, Oracle) proveen el historial de visitas, pedidos, cuentas nuevas y rendimiento por territorio que alimentan los criterios basados en resultados y en comportamiento. La SFA automatiza el reporte de actividades del vendedor.</p>
+    </div>
+    <div class="map-box" style="margin-bottom:0">
+      <div class="map-title" style="color:var(--accent-xiv)">XIV → IX</div>
+      <p style="font-size:13px;line-height:1.7">La tecnología impacta la motivación al reducir la carga administrativa del vendedor (SFA), al dar visibilidad del progreso hacia la cuota en tiempo real, y al crear nuevos canales de venta (e-commerce) que requieren nuevos perfiles y motivadores para la fuerza de ventas.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="map-box">
+    <div class="map-title">Conceptos de alta densidad evaluativa — repasa estos primero</div>
+    <table class="cmp-table">
+      <tr>
+        <th>Concepto</th>
+        <th>Tema</th>
+        <th>Fuente</th>
+        <th>Por qué es clave</th>
+      </tr>
+      <tr>
+        <td>Teorías de motivación (3 grupos) y sus autores</td>
+        <td style="color:var(--accent-ix)">IX</td>
+        <td><span class="source-both">AMBAS</span></td>
+        <td>Distinción contenido vs proceso vs reforzamiento; Maslow vs ERG vs Herzberg</td>
+      </tr>
+      <tr>
+        <td>Teoría de la Expectativa (Vroom)</td>
+        <td style="color:var(--accent-ix)">IX</td>
+        <td><span class="source-both">AMBAS</span></td>
+        <td>Conecta motivación con el diseño de compensación variable</td>
+      </tr>
+      <tr>
+        <td>7 etapas del plan de compensación</td>
+        <td style="color:var(--accent-x)">X</td>
+        <td><span class="source-both">AMBAS</span></td>
+        <td>Hair lo lista explícitamente; preguntas de secuencia son frecuentes</td>
+      </tr>
+      <tr>
+        <td>Ventajas y desventajas de los 3 planes</td>
+        <td style="color:var(--accent-x)">X</td>
+        <td><span class="source-both">AMBAS</span></td>
+        <td>Preguntas de caso; cuándo usar cada plan</td>
+      </tr>
+      <tr>
+        <td>3 tipos de medidas de evaluación</td>
+        <td style="color:var(--accent-xi)">XI</td>
+        <td><span class="source-both">AMBAS</span></td>
+        <td>Base del Cap. 14; Hair lo desarrolla con ejemplos concretos</td>
+      </tr>
+      <tr>
+        <td>4 tipos de cuotas y sus variantes</td>
+        <td style="color:var(--accent-xi)">XI</td>
+        <td><span class="source-both">AMBAS</span></td>
+        <td>Muy probable en preguntas cuantitativas o de caso</td>
+      </tr>
+      <tr>
+        <td>4 técnicas de evaluación (BARS, APO, etc.)</td>
+        <td style="color:var(--accent-xi)">XI</td>
+        <td><span class="source-both">AMBAS</span></td>
+        <td>Cap. 14 las desarrolla en detalle; BARS tiene 4 pasos específicos</td>
+      </tr>
+      <tr>
+        <td>5 niveles del e-commerce</td>
+        <td style="color:var(--accent-xiv)">XIV</td>
+        <td><span class="source-diapo">DIAPOS</span></td>
+        <td>Secuencia con ejemplos; pregunta de identificación de nivel es típica</td>
+      </tr>
+      <tr>
+        <td>Ideas clave del CRM (7 puntos)</td>
+        <td style="color:var(--accent-xiv)">XIV</td>
+        <td><span class="source-diapo">DIAPOS</span></td>
+        <td>El profesor los enumeró en clase; posible pregunta de listado</td>
+      </tr>
+    </table>
+  </div>
+
+</div>
+</div>
+
+<script>
+  function switchTab(id) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    document.querySelector('[data-tab="' + id + '"]').classList.add('active');
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+
+  function toggle(btn) {
+    const body = btn.nextElementSibling;
+    const isOpen = body.classList.contains('open');
+    btn.classList.toggle('open', !isOpen);
+    body.classList.toggle('open', !isOpen);
+  }
+
+  function revealAnswer(btn) {
+    const box = btn.nextElementSibling;
+    const isOpen = box.classList.contains('open');
+    box.classList.toggle('open', !isOpen);
+    btn.textContent = isOpen ? 'Ver respuesta modelo' : 'Ocultar respuesta';
+  }
+</script>
+</body>
+</html>
